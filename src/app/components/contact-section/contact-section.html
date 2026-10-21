@@ -1,0 +1,83 @@
+<section id="contact" class="border-t border-line-2">
+  <div class="page-x section-y grid grid-cols-[repeat(auto-fit,minmax(min(100%,420px),1fr))] gap-14">
+    <div appReveal class="flex flex-col gap-7">
+      <p class="m-0 font-mono text-[13px] text-mute">{{ dict().sections.contact }}</p>
+      <h2 class="m-0 text-[clamp(2.25rem,5.4vw,4rem)] leading-none font-bold tracking-[-0.04em]">
+        {{ dict().headings.contact }}
+      </h2>
+      <dl class="m-0 flex flex-col border-t border-line font-mono text-sm">
+        <div class="flex justify-between gap-4 border-b border-line-2 py-3.5">
+          <dt class="text-mute">{{ dict().contact.email }}</dt>
+          <dd class="m-0 text-right break-all"><a [href]="'mailto:' + profile.email">{{ profile.email }}</a></dd>
+        </div>
+        <div class="flex justify-between gap-4 border-b border-line-2 py-3.5">
+          <dt class="text-mute">{{ dict().contact.linkedin }}</dt>
+          <dd class="m-0"><a [href]="profile.links.linkedin.href" target="_blank" rel="noopener">{{ profile.links.linkedin.label }} ↗</a></dd>
+        </div>
+        <div class="flex justify-between gap-4 border-b border-line-2 py-3.5">
+          <dt class="text-mute">{{ dict().contact.whatsapp }}</dt>
+          <dd class="m-0">
+            <a [href]="whatsappUrl()" target="_blank" rel="noopener" [attr.aria-label]="dict().contact.whatsappLabel + ' ' + profile.phone"
+              >{{ profile.phone }} ↗</a
+            >
+          </dd>
+        </div>
+        <div class="flex justify-between gap-4 border-b border-line-2 py-3.5">
+          <dt class="text-mute">{{ dict().contact.github }}</dt>
+          <dd class="m-0"><a [href]="profile.links.github.href" target="_blank" rel="noopener">soufiane22 ↗</a></dd>
+        </div>
+        <div class="flex justify-between gap-4 border-b border-line-2 py-3.5">
+          <dt class="text-mute">{{ dict().contact.cv }}</dt>
+          <dd class="m-0 flex gap-3.5">
+            <a [href]="profile.cv.en" download lang="en">{{ dict().contact.english }} ↓</a>
+            <a [href]="profile.cv.fr" download lang="fr">{{ dict().contact.french }} ↓</a>
+          </dd>
+        </div>
+      </dl>
+    </div>
+
+    @if (!sent()) {
+      <form appReveal (submit)="submit($event)" class="flex flex-col gap-4.5 self-end">
+        <label class="flex flex-col gap-2 font-mono text-xs text-mute">
+          {{ dict().contact.name }}
+          <input
+            required
+            name="name"
+            autocomplete="name"
+            class="rounded-[10px] border border-line bg-bg-2 px-4 py-3.5 font-sans text-base text-fg outline-none focus:border-accent"
+          />
+        </label>
+        <label class="flex flex-col gap-2 font-mono text-xs text-mute">
+          {{ dict().contact.emailField }}
+          <input
+            required
+            type="email"
+            name="email"
+            autocomplete="email"
+            class="rounded-[10px] border border-line bg-bg-2 px-4 py-3.5 font-sans text-base text-fg outline-none focus:border-accent"
+          />
+        </label>
+        <label class="flex flex-col gap-2 font-mono text-xs text-mute">
+          {{ dict().contact.message }}
+          <textarea
+            required
+            name="message"
+            rows="5"
+            class="resize-y rounded-[10px] border border-line bg-bg-2 px-4 py-3.5 font-sans text-base leading-normal text-fg outline-none focus:border-accent"
+          ></textarea>
+        </label>
+        <button
+          type="submit"
+          class="btn cursor-pointer self-start rounded-full border-0 bg-accent px-6.5 py-3.5 text-base font-semibold text-accent-ink hover:brightness-110"
+        >
+          {{ dict().contact.send }}
+        </button>
+      </form>
+    } @else {
+      <div role="status" class="flex flex-col gap-2 self-end rounded-2xl border border-line bg-bg-2 p-8">
+        <span class="font-mono text-xs font-medium text-accent">{{ dict().contact.sentTitle }}</span>
+        <span class="text-xl font-medium">{{ dict().contact.sentBody }}</span>
+      </div>
+    }
+  </div>
+</section>

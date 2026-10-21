@@ -1,0 +1,46 @@
+<header class="sticky top-0 z-20 border-b border-line-2 bg-hdr backdrop-blur-md">
+  <div class="page-x flex items-center justify-between gap-6 py-4">
+    <a
+      [routerLink]="['/', lang()]"
+      [attr.aria-label]="dict().a11y.home"
+      class="font-display text-[22px] font-bold tracking-[-0.04em]"
+    >
+      sa<span class="text-accent">.</span>
+    </a>
+
+    <div class="flex items-center gap-4 nav:gap-7">
+      <nav [attr.aria-label]="dict().a11y.primaryNav" class="hidden gap-6.5 font-mono text-[13px] text-mute nav:flex">
+        @for (key of navKeys; track key) {
+          <a [routerLink]="['/', lang()]" [fragment]="key">{{ dict().nav[key] }}</a>
+        }
+      </nav>
+      <app-lang-switch [lang]="lang()" [label]="dict().header.language" />
+      <app-theme-toggle [label]="dict().header.themeToggle" />
+      <button
+        type="button"
+        (click)="menuOpen.set(!menuOpen())"
+        [attr.aria-expanded]="menuOpen()"
+        aria-controls="mobile-nav"
+        class="h-[34px] cursor-pointer rounded-full border border-line bg-transparent px-3 font-mono text-[13px] nav:hidden"
+      >
+        {{ dict().header.menu }}
+      </button>
+    </div>
+  </div>
+
+  @if (menuOpen()) {
+    <nav id="mobile-nav" [attr.aria-label]="dict().a11y.mobileNav" class="page-x flex flex-col pb-5 text-[22px] font-medium nav:hidden">
+      @for (key of navKeys; track key; let last = $last) {
+        <a
+          [routerLink]="['/', lang()]"
+          [fragment]="key"
+          (click)="menuOpen.set(false)"
+          class="py-2.5"
+          [class.border-b]="!last"
+          [class.border-line-2]="!last"
+          >{{ dict().nav[key] }}</a
+        >
+      }
+    </nav>
+  }
+</header>

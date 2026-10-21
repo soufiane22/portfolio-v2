@@ -1,0 +1,132 @@
+<div class="flex flex-col gap-6">
+  <div
+    #track
+    (scroll)="onScroll()"
+    (pointerdown)="onPointerDown($event)"
+    (pointermove)="onPointerMove($event)"
+    (pointerup)="onPointerUp()"
+    (pointercancel)="onPointerUp()"
+    tabindex="0"
+    role="region"
+    aria-roledescription="carousel"
+    [attr.aria-label]="label()"
+    [class.snap-x]="!dragging()"
+    [class.snap-mandatory]="!dragging()"
+    [class.scroll-smooth]="!dragging()"
+    [class.cursor-grabbing]="dragging()"
+    [class.select-none]="dragging()"
+    class="-mx-[clamp(1.25rem,5vw,3.5rem)] flex cursor-grab scroll-px-[clamp(1.25rem,5vw,3.5rem)] gap-5 overflow-x-auto px-[clamp(1.25rem,5vw,3.5rem)] pt-2 pb-4 [scrollbar-width:none] md:mx-0 md:scroll-px-0 md:gap-6 md:px-0 [&::-webkit-scrollbar]:hidden"
+  >
+    @for (item of items(); track item.src; let i = $index) {
+      <figure
+        class="m-0 flex w-[78%] flex-none snap-start flex-col gap-4 sm:w-[calc((100%-1.25rem)/2)] lg:w-[calc((100%-3rem)/3)]"
+        role="group"
+        aria-roledescription="slide"
+        [attr.aria-label]="i + 1 + ' / ' + items().length"
+      >
+        <!-- Tablet frame -->
+        <button
+          type="button"
+          (click)="open(item)"
+          [attr.aria-label]="labels().enlarge + ' — ' + item.caption[lang()]"
+          class="group relative block w-full rounded-[1.75rem] border border-line bg-[#0b0a09] p-2.5 shadow-[0_24px_60px_rgb(0_0_0/0.4)] transition-transform hover:-translate-y-1"
+          [class.cursor-zoom-in]="!dragging()"
+          [class.cursor-grabbing]="dragging()"
+        >
+          <span aria-hidden="true" class="absolute top-1 left-1/2 size-1 -translate-x-1/2 rounded-full bg-white/25"></span>
+          <img
+            [ngSrc]="item.src"
+            [width]="item.width"
+            [height]="item.height"
+            [alt]="item.alt[lang()]"
+            [priority]="i === 0"
+            draggable="false"
+            class="pointer-events-none block h-auto w-full rounded-[1.2rem]"
+          />
+          <span
+            aria-hidden="true"
+            class="absolute top-4 right-4 rounded-full bg-black/60 px-2 py-1 font-mono text-[11px] text-white opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+            >⤢</span
+          >
+        </button>
+        <figcaption class="flex gap-3 text-[15px] leading-[1.5] text-fg-2">
+          <span class="flex-none font-mono text-xs leading-[1.9] text-accent">{{ (i + 1).toString().padStart(2, '0') }}</span>
+          <span>{{ item.caption[lang()] }}</span>
+        </figcaption>
+      </figure>
+    }
+  </div>
+
+  <!-- Controls -->
+  <div class="flex items-center justify-between gap-4">
+    <div class="flex flex-wrap gap-1.5">
+      @for (item of items(); track item.src; let i = $index) {
+        <button
+          type="button"
+          (click)="go(i)"
+          [attr.aria-label]="labels().goTo + ' ' + (i + 1)"
+          [attr.aria-current]="isVisible(i) ? 'true' : null"
+          class="h-2 cursor-pointer rounded-full border-0 p-0 transition-[width,background-color]"
+          [class]="isVisible(i) ? 'w-6 bg-accent' : 'w-2 bg-line'"
+        ></button>
+      }
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="font-mono text-xs text-mute" aria-live="polite">{{ position() }}</span>
+      <button
+        type="button"
+        (click)="go(index() - 1)"
+        [disabled]="atStart()"
+        [attr.aria-label]="labels().prev"
+        class="grid size-11 cursor-pointer place-items-center rounded-full border border-line bg-bg text-lg enabled:hover:border-accent enabled:hover:text-accent disabled:cursor-default disabled:opacity-35"
+      >
+        <span aria-hidden="true">←</span>
+      </button>
+      <button
+        type="button"
+        (click)="go(index() + 1)"
+        [disabled]="atEnd()"
+        [attr.aria-label]="labels().next"
+        class="grid size-11 cursor-pointer place-items-center rounded-full border border-line bg-bg text-lg enabled:hover:border-accent enabled:hover:text-accent disabled:cursor-default disabled:opacity-35"
+      >
+        <span aria-hidden="true">→</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<dialog
+  #dialog
+  tabindex="-1"
+  (click)="onDialogClick($event)"
+  (keydown.escape)="close()"
+  (close)="zoomed.set(null)"
+  class="m-auto max-h-[94vh] max-w-[min(94vw,720px)] border-0 bg-transparent p-0 backdrop:bg-black/85 backdrop:backdrop-blur-sm"
+>
+  @if (zoomed(); as item) {
+    <figure class="m-0 flex flex-col items-center gap-3">
+      @if (zoomFailed()) {
+        <p class="m-0 rounded-2xl bg-bg-2 px-6 py-10 text-center text-fg-2">{{ labels().unavailable }}</p>
+      } @else {
+        <img
+          [src]="item.src"
+          [width]="item.width"
+          [height]="item.height"
+          [alt]="item.alt[lang()]"
+          (error)="zoomFailed.set(true)"
+          class="block h-auto max-h-[84vh] w-auto max-w-full rounded-2xl"
+        />
+      }
+      <figcaption class="flex items-center gap-4 font-mono text-xs text-white">
+        <span>{{ item.caption[lang()] }}</span>
+        <button
+          type="button"
+          (click)="close()"
+          class="flex-none cursor-pointer rounded-full border border-white/30 bg-transparent px-3 py-1 text-white hover:border-white"
+        >
+          {{ labels().close }} ×
+        </button>
+      </figcaption>
+    </figure>
+  }
+</dialog>

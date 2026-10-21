@@ -1,0 +1,31 @@
+<a
+  [routerLink]="['/', lang()]"
+  fragment="main"
+  class="btn sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-full focus:bg-accent focus:px-4 focus:py-2 focus:text-accent-ink"
+  >{{ dict().skip }}</a
+>
+<app-site-header [lang]="lang()" [dict]="dict()" />
+
+<main id="main" tabindex="-1" class="outline-none">
+  <app-hero [lang]="lang()" [dict]="dict()" />
+  <app-about-section [lang]="lang()" [dict]="dict()" />
+
+  <!-- Below the fold: rendered on the server for SEO, hydrated only when scrolled into view. -->
+  @defer (hydrate on viewport) {
+    <app-experience-section [lang]="lang()" [dict]="dict()" />
+  }
+  @defer (hydrate on viewport) {
+    <app-work-section [lang]="lang()" [dict]="dict()" />
+  }
+  @defer (hydrate on viewport) {
+    <app-skills-section [lang]="lang()" [dict]="dict()" />
+  }
+  @defer (hydrate on viewport) {
+    <app-notes-section [lang]="lang()" [dict]="dict()" />
+  }
+  @defer (hydrate on viewport) {
+    <app-contact-section [lang]="lang()" [dict]="dict()" />
+  }
+</main>
+
+<app-site-footer [lang]="lang()" [dict]="dict()" />

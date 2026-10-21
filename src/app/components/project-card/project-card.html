@@ -1,0 +1,45 @@
+<article
+  appReveal
+  class="flex h-full flex-col gap-5 rounded-2xl p-[clamp(1.375rem,3vw,2rem)] transition-[border-color,transform] duration-250 hover:-translate-y-[3px] hover:border-accent"
+  [class]="project().inProgress ? 'border border-dashed border-line bg-transparent' : 'border border-line bg-bg-2'"
+>
+  <div class="flex justify-between gap-3 font-mono text-xs text-mute">
+    <span>{{ project().org[lang()] }}</span>
+    @if (project().inProgress) {
+      <span class="inline-flex items-center gap-[7px] text-accent">
+        <span class="size-1.5 rounded-full bg-accent" aria-hidden="true"></span>{{ dict().work.inProgress }} · {{ project().period[lang()] }}
+      </span>
+    } @else {
+      <span>{{ project().period[lang()] }}</span>
+    }
+  </div>
+
+  <div class="flex flex-col gap-2.5">
+    <h3 class="m-0 text-[clamp(1.5rem,2.6vw,1.875rem)] leading-[1.1] font-semibold tracking-[-0.025em]">
+      {{ project().title[lang()] }}
+    </h3>
+    <p class="m-0 text-base leading-[1.55] text-fg-2">{{ project().summary[lang()] }}</p>
+  </div>
+
+  <ul class="m-0 flex list-none flex-wrap gap-1.5 p-0 font-mono text-xs text-fg-2">
+    @for (tech of project().stack; track tech) {
+      <li class="rounded-full border border-line px-[9px] py-1">{{ tech }}</li>
+    }
+  </ul>
+
+  <div class="mt-auto flex flex-col gap-1.5 border-t border-line-2 pt-[18px]">
+    <p class="m-0 font-mono text-[11px] font-medium tracking-[0.08em] text-accent uppercase">{{ dict().work.keyDecision }}</p>
+    <p class="m-0 text-base leading-[1.5]">{{ project().decision[lang()] }}</p>
+  </div>
+
+  <div class="flex flex-wrap gap-x-5 gap-y-2 font-mono text-[13px] font-medium">
+    @if (project().caseStudy; as slug) {
+      <a [routerLink]="['/', lang(), 'work', slug]">{{ dict().work.details }} →</a>
+    }
+    @for (repo of project().repos; track repo.href) {
+      <a [href]="repo.href" target="_blank" rel="noopener">{{ repo.label ?? dict().work.github }} ↗</a>
+    } @empty {
+      <span class="text-mute" [attr.title]="dict().work.privateTitle">{{ dict().work.privateRepo }}</span>
+    }
+  </div>
+</article>

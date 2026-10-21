@@ -1,0 +1,56 @@
+<section id="experience" class="border-t border-line-2">
+  <div class="page-x section-y flex flex-wrap gap-x-12 gap-y-6">
+    <p class="m-0 flex-none basis-50 font-mono text-[13px] text-mute">{{ dict().sections.experience }}</p>
+    <div class="max-w-215 flex-[1_1_520px]">
+      <h2 appReveal class="display-h2 mb-12">{{ dict().headings.experience }}</h2>
+      <ol class="relative m-0 list-none border-l border-line p-0">
+        @for (job of jobs; track job.id; let last = $last) {
+          <li appReveal class="relative pl-8" [class.pb-11]="!last">
+            <span
+              aria-hidden="true"
+              class="absolute top-2 -left-[5px] size-[9px] rounded-full"
+              [class]="
+                job.current
+                  ? 'bg-accent shadow-[0_0_0_4px_var(--accent-soft)]'
+                  : 'border border-fg-2 bg-bg'
+              "
+            ></span>
+            <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+              <h3 class="m-0 text-2xl font-semibold tracking-[-0.02em]">{{ job.company }}</h3>
+              <span class="font-mono text-xs text-mute">{{ job.period[lang()] }}</span>
+            </div>
+            <p class="mt-1 mb-0 font-mono text-[13px] text-fg-2">{{ job.role[lang()] }}</p>
+            @if (job.summary; as summary) {
+              <p class="mt-3 mb-0 max-w-155 text-[17px] leading-[1.55] text-fg-2">{{ summary[lang()] }}</p>
+            } @else {
+              <!-- TODO: replace with the real one-line outcome in content/experience.ts -->
+              <p class="mt-3 mb-0 max-w-155 text-[17px] leading-[1.55] text-mute">{{ todoSummary[lang()] }}</p>
+            }
+            @if (job.highlights; as highlights) {
+              <ul class="m-0 mt-3.5 flex max-w-155 list-none flex-col gap-2 p-0 text-[15px] leading-[1.55] text-fg-2">
+                @for (point of highlights; track point.en) {
+                  <li class="flex gap-3">
+                    <span aria-hidden="true" class="mt-[0.65em] size-1.5 flex-none rounded-full bg-accent"></span>
+                    <span>{{ point[lang()] }}</span>
+                  </li>
+                }
+              </ul>
+            }
+            @if (job.badges; as badges) {
+              <ul class="m-0 mt-3.5 flex list-none flex-wrap gap-2 p-0">
+                @for (badge of badges; track badge.value + badge.label.en) {
+                  <li class="rounded-md bg-accent-soft px-2.5 py-1 font-mono text-xs font-medium text-accent">
+                    {{ badge.value }} {{ badge.label[lang()] }}
+                  </li>
+                }
+              </ul>
+            }
+            @if (job.stack; as stack) {
+              <p class="mt-3 mb-0 font-mono text-xs leading-relaxed text-mute">{{ stack.join(' · ') }}</p>
+            }
+          </li>
+        }
+      </ol>
+    </div>
+  </div>
+</section>
