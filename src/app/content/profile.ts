@@ -1,11 +1,5 @@
 // Single source of truth for portfolio facts. Never add anything not stated by the owner.
 // Source: design/Portfolio.html. Unknown values stay as TODO placeholders.
-export interface Stat {
-  readonly value: string;
-  readonly labelKey: 'users' | 'employees' | 'manualWork' | 'years';
-  readonly accent?: boolean;
-}
-
 export interface ProfileLink {
   readonly label: string;
   readonly href: string;
@@ -16,12 +10,6 @@ export const profile = {
   email: 'soufiane.alouielidrissi@gmail.com',
   // International format with country code. Change it here only: the WhatsApp link is derived from it.
   phone: '+212 6 41 18 56 80',
-  stats: [
-    { value: '30,000+', labelKey: 'users' },
-    { value: '200+', labelKey: 'employees' },
-    { value: '−90%', labelKey: 'manualWork', accent: true },
-    { value: '4+', labelKey: 'years' },
-  ] satisfies readonly Stat[],
   links: {
     github: { label: 'github.com/soufiane22', href: 'https://github.com/soufiane22' },
     linkedin: {

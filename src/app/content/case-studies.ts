@@ -108,30 +108,31 @@ export interface CaseStudy {
   readonly contribution?: Contribution;
 }
 
-// TODO(owner): confirm the architecture figure, the context paragraphs and the outcome sentence
-// are accurate before publishing — they come from the design draft, not from verified sources.
 export const caseStudies: readonly CaseStudy[] = [
   {
+    // Sources: CV (user count) and a read-only analysis of the private codebase — architecture,
+    // CI steps and the feature-flag service from the source, counts and authorship from git
+    // history (Sep 2024 — Oct 2026).
     slug: 'matys',
     number: 1,
     org: 'Matys by Cegid',
     title: { en: 'Accounting SaaS for 30,000+ users', fr: 'SaaS de comptabilité pour 30 000+ utilisateurs' },
     role: { en: 'Software engineer (front-end / Angular)', fr: 'Ingénieur logiciel (front-end / Angular)' },
-    period: { en: 'Nov 2024 — now', fr: 'Nov. 2024 — aujourd’hui' },
-    team: { en: 'Several product squads', fr: 'Plusieurs squads produit' },
+    period: { en: 'Sep 2024 — now', fr: 'Sept. 2024 — aujourd’hui' },
+    team: { en: 'Team of 15+ developers', fr: 'Équipe de plus de 15 développeurs' },
     repos: [],
     problem: {
-      en: 'Accountants spend their day in this product. Every slow screen or wrong total costs them time and trust, and the codebase had grown to the point where one team’s change could break another team’s screen.',
-      fr: 'Les comptables passent leur journée dans ce produit. Chaque écran lent ou total erroné leur coûte du temps et de la confiance, et la base de code avait grossi au point qu’un changement d’une équipe pouvait casser l’écran d’une autre.',
+      en: 'The French e-invoicing reform requires companies to receive electronic invoices through certified platforms from September 2026. Accountants have to process those invoices — statuses, credit notes, matching with orders — in the product they already spend their day in, while the rules were still moving during development.',
+      fr: 'La réforme de la facturation électronique oblige les entreprises françaises à recevoir leurs factures via des plateformes agréées dès septembre 2026. Les comptables doivent traiter ces factures — statuts, avoirs, rapprochement avec les commandes — dans le produit où ils passent déjà leur journée, alors que les règles bougeaient encore pendant le développement.',
     },
     context: [
       {
-        en: 'A mature Angular application serving more than 30,000 users, with bookkeeping, invoicing and reporting owned by different squads.',
-        fr: 'Une application Angular mature servant plus de 30 000 utilisateurs, avec saisie comptable, facturation et reporting gérés par des squads différentes.',
+        en: 'An accounting SaaS used by more than 30,000 users, built in Angular 17 inside an Nx monorepo that holds two applications: Compta, and Digicompta — the invoice dematerialisation and e-invoicing app.',
+        fr: 'Un SaaS de comptabilité utilisé par plus de 30 000 utilisateurs, construit en Angular 17 dans un monorepo Nx qui regroupe deux applications : Compta, et Digicompta — la dématérialisation des factures et la facture électronique.',
       },
       {
-        en: 'Releases went out through Azure DevOps pipelines. Authentication used OAuth 2.0 / OIDC, shared with other products in the suite.',
-        fr: 'Les livraisons passaient par des pipelines Azure DevOps. L’authentification utilisait OAuth 2.0 / OIDC, partagée avec les autres produits de la suite.',
+        en: 'I work mostly on Digicompta, in a team of 15+ developers. Releases go through Azure DevOps pipelines; authentication uses OAuth 2.0 / OIDC, shared with the other products of the suite.',
+        fr: 'Je travaille surtout sur Digicompta, dans une équipe de plus de 15 développeurs. Les livraisons passent par des pipelines Azure DevOps ; l’authentification utilise OAuth 2.0 / OIDC, partagée avec les autres produits de la suite.',
       },
     ],
     architecture: {
@@ -142,11 +143,16 @@ export const caseStudies: readonly CaseStudy[] = [
           arrow: false,
           nodes: [
             {
-              name: { en: 'Angular shell', fr: 'Shell Angular' },
-              tags: ['ledger', 'invoicing', 'reporting'],
-              libs: ['shared-ui', 'data-access'],
+              name: { en: 'Digicompta app', fr: 'App Digicompta' },
+              detail: { en: 'Angular 17 · Signals · NG-ZORRO', fr: 'Angular 17 · Signals · NG-ZORRO' },
+              tags: ['Factur-X', 'e-reporting', 'onboarding'],
+              libs: ['shell', 'features', 'ui', 'data-access'],
               caption: { en: 'Nx workspace', fr: 'Workspace Nx' },
               owned: true,
+            },
+            {
+              name: { en: 'Compta app', fr: 'App Compta' },
+              detail: { en: 'general ledger · VAT · bank', fr: 'grand livre · TVA · banque' },
             },
           ],
         },
@@ -160,8 +166,8 @@ export const caseStudies: readonly CaseStudy[] = [
               detail: { en: 'OAuth 2.0 / OIDC', fr: 'OAuth 2.0 / OIDC' },
             },
             {
-              name: { en: 'API gateway', fr: 'Passerelle d’API' },
-              detail: { en: 'REST · JSON', fr: 'REST · JSON' },
+              name: { en: 'HTTP interceptors', fr: 'Intercepteurs HTTP' },
+              detail: { en: 'tenant & company on every call', fr: 'locataire & dossier sur chaque appel' },
             },
           ],
         },
@@ -171,23 +177,19 @@ export const caseStudies: readonly CaseStudy[] = [
           arrow: true,
           nodes: [
             {
-              name: { en: 'Accounting service', fr: 'Service de comptabilité' },
-              detail: { en: 'entries · invoices', fr: 'écritures · factures' },
-            },
-            {
-              name: { en: 'Reporting service', fr: 'Service de reporting' },
-              detail: { en: 'exports · balances', fr: 'exports · soldes' },
+              name: { en: 'Accounting APIs', fr: 'API de comptabilité' },
+              detail: { en: 'REST · entries · invoices · statuses', fr: 'REST · écritures · factures · statuts' },
             },
           ],
         },
         {
           step: 4,
-          label: { en: 'data', fr: 'données' },
+          label: { en: 'reform', fr: 'réforme' },
           arrow: true,
           nodes: [
             {
-              name: { en: 'Tenant databases', fr: 'Bases par locataire' },
-              detail: { en: 'one per company', fr: 'une par entreprise' },
+              name: { en: 'Certified platforms', fr: 'Plateformes agréées' },
+              detail: { en: 'e-invoices · e-reporting', fr: 'factures électroniques · e-reporting' },
             },
           ],
         },
@@ -195,40 +197,64 @@ export const caseStudies: readonly CaseStudy[] = [
       pipeline: {
         left: { en: 'Azure DevOps · CI/CD', fr: 'Azure DevOps · CI/CD' },
         right: {
-          en: 'nx affected → build · test · deploy only what changed',
-          fr: 'nx affected → build · test · déploiement de ce qui a changé uniquement',
+          en: 'one pipeline per app → lint · Jest tests · production build',
+          fr: 'un pipeline par application → lint · tests Jest · build de production',
         },
       },
       caption: {
-        en: 'fig. 01 — simplified; amber marks the part I owned.',
-        fr: 'fig. 01 — simplifiée ; l’ambre marque la partie dont j’avais la charge.',
+        en: 'fig. 01 — simplified; amber marks the part I work on.',
+        fr: 'fig. 01 — simplifiée ; l’ambre marque la partie sur laquelle je travaille.',
       },
     },
     decision: {
       headline: {
-        en: 'Split the front end into Nx libraries by business domain, with lint rules that block imports across domains.',
-        fr: 'Découper le front-end en bibliothèques Nx par domaine métier, avec des règles de lint qui bloquent les imports entre domaines.',
+        en: 'One processing screen per invoice, split into independent sections.',
+        fr: 'Un seul écran de traitement par facture, découpé en rubriques indépendantes.',
       },
       before: {
-        en: 'The alternative was one large shared module that every squad edited. Domain libraries made ownership explicit, and ',
-        fr: 'L’alternative était un grand module partagé que toutes les squads modifiaient. Les bibliothèques par domaine ont rendu la responsabilité explicite, et ',
+        en: 'Each section has its own component and keeps its state in a service like ',
+        fr: 'Chaque rubrique a son composant et garde son état dans un service comme ',
       },
-      code: 'nx affected',
+      code: 'FactureTvaFormulaireService',
       after: {
-        en: ' meant CI only rebuilt what a change touched. The cost was more upfront structure and a few weeks of moving code.',
-        fr: ' a permis à la CI de ne reconstruire que ce qu’un changement touchait. Le coût : plus de structure au départ et quelques semaines de déplacement de code.',
+        en: '. A new rule of the reform becomes a new section, not a rewrite: discounts, prepayments, original invoice of a credit note, e-invoice statuses.',
+        fr: '. Une nouvelle règle de la réforme devient une rubrique, pas une réécriture : escompte, paiements anticipés, facture d’origine d’un avoir, statuts de facture électronique.',
       },
+    },
+    contribution: {
+      summary: {
+        en: 'About 630 commits and 340+ merged pull requests since September 2024 — second among 15+ contributors.',
+        fr: 'Environ 630 commits et plus de 340 pull requests mergées depuis septembre 2024 — deuxième sur plus de 15 contributeurs.',
+      },
+      items: [
+        {
+          en: 'Evolved the accounting processing screen for incoming invoices: detail accounts, input checks, amounts including VAT, and the original invoice of a credit note.',
+          fr: 'Fait évoluer l’écran de traitement comptable des factures reçues : comptes de détail, contrôles de saisie, montants TTC et facture d’origine d’un avoir.',
+        },
+        {
+          en: 'Built the purchase-invoice lifecycle screens: e-invoice statuses, their history and how they display.',
+          fr: 'Développé les écrans du cycle de vie des factures d’achat : statuts de facture électronique, leur historique et leur affichage.',
+        },
+        {
+          en: 'Worked on the onboarding flow to a certified e-invoicing platform: identity and address checks, and a notice when the delegation was not granted.',
+          fr: 'Travaillé sur le parcours d’onboarding vers une plateforme agréée : contrôles d’identité et d’adresse, et un message quand la délégation n’a pas été accordée.',
+        },
+        {
+          en: 'Handled expired sessions by sending the user back through the Cegid login on a 401.',
+          fr: 'Géré les sessions expirées en renvoyant l’utilisateur vers la connexion Cegid sur une erreur 401.',
+        },
+      ],
     },
     metrics: [
-      { value: '30,000+', label: { en: 'daily users', fr: 'utilisateurs quotidiens' } },
-      { value: '—', label: { en: 'metric to add', fr: 'métrique à ajouter' }, accent: true, todo: true },
-      { value: '—', label: { en: 'metric to add', fr: 'métrique à ajouter' }, todo: true },
+      { value: '30,000+', label: { en: 'users', fr: 'utilisateurs' } },
+      { value: '340+', label: { en: 'merged pull requests', fr: 'pull requests mergées' }, accent: true },
+      { value: '#2', label: { en: 'contributor among 15+ developers', fr: 'contributeur sur 15+ développeurs' } },
     ],
     outcome: {
-      en: 'Squads shipped independently, and cross-team regressions became rare enough to stop being a weekly topic.',
-      fr: 'Les squads ont livré de façon indépendante, et les régressions entre équipes sont devenues assez rares pour cesser d’être un sujet hebdomadaire.',
+      en: 'The team shipped 47 production releases since September 2024. The e-invoicing screens I worked on went out batch by batch.',
+      fr: 'L’équipe a livré 47 versions en production depuis septembre 2024. Les écrans de facture électronique sur lesquels j’ai travaillé sont partis lot par lot.',
     },
-    stack: ['Angular', 'TypeScript', 'RxJS', 'Nx', 'OAuth 2.0 / OIDC', 'Azure DevOps'],
+    stack: ['Angular 17', 'TypeScript', 'RxJS', 'Signals', 'Nx', 'NG-ZORRO', 'Jest', 'Factur-X', 'OAuth 2.0 / OIDC', 'Azure DevOps'],
   },
   {
     // Sources: CV (Sanford Federal entry) and a read-only analysis of the private codebase

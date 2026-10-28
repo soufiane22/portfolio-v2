@@ -55,9 +55,9 @@ describe('CaseStudyPage', () => {
     expect(el.textContent).toContain('Next case study');
   });
 
-  it('numbers only the sections a case study has (Matys has no optional ones)', async () => {
+  it('numbers only the sections a case study has (Matys only adds “My part”)', async () => {
     const el = await render('fr', 'matys');
-    expect(el.textContent).toContain('05 — Résultat');
+    expect(el.textContent).toContain('06 — Résultat');
     expect(el.textContent).not.toContain('Cycle de vie');
   });
 

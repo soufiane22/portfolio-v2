@@ -25,16 +25,16 @@ export const projects: readonly Project[] = [
   {
     id: 'matys',
     org: { en: 'Matys by Cegid', fr: 'Matys by Cegid' },
-    period: { en: 'Nov 2024 — now', fr: 'Nov. 2024 — aujourd’hui' },
+    period: { en: 'Sep 2024 — now', fr: 'Sept. 2024 — aujourd’hui' },
     title: { en: 'Accounting SaaS for 30,000+ users', fr: 'SaaS de comptabilité pour 30 000+ utilisateurs' },
     summary: {
-      en: 'Feature work across bookkeeping, invoicing and reporting screens in a large Angular codebase.',
-      fr: 'Développement de fonctionnalités sur les écrans de saisie comptable, de facturation et de reporting, dans une grande base de code Angular.',
+      en: 'E-invoicing screens for the French reform: invoice processing, e-invoice statuses and onboarding to certified platforms. 340+ merged pull requests.',
+      fr: 'Écrans de la facture électronique pour la réforme française : traitement des factures, statuts et onboarding vers les plateformes agréées. Plus de 340 pull requests mergées.',
     },
     stack: ['Angular', 'TypeScript', 'RxJS', 'Nx', 'Azure DevOps'],
     decision: {
-      en: 'Split the front end into Nx libraries by business domain, so each team could ship without touching another team’s code.',
-      fr: 'Découper le front-end en bibliothèques Nx par domaine métier, pour que chaque équipe puisse livrer sans toucher au code d’une autre.',
+      en: 'One processing screen per invoice, split into independent sections.',
+      fr: 'Un seul écran de traitement par facture, découpé en rubriques indépendantes.',
     },
     repos: [],
     caseStudy: 'matys',

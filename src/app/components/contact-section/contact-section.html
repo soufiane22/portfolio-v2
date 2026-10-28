@@ -36,8 +36,10 @@
       </dl>
     </div>
 
-    @if (!sent()) {
-      <form appReveal (submit)="submit($event)" class="flex flex-col gap-4.5 self-end">
+    @if (status() !== 'sent') {
+      <form appReveal (submit)="submit($event)" [attr.aria-busy]="status() === 'sending'" class="flex flex-col gap-4.5 self-end">
+        <!-- Honeypot for bots: hidden from people and assistive tech. -->
+        <input type="checkbox" name="botcheck" value="1" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" />
         <label class="flex flex-col gap-2 font-mono text-xs text-mute">
           {{ dict().contact.name }}
           <input
@@ -68,10 +70,17 @@
         </label>
         <button
           type="submit"
-          class="btn cursor-pointer self-start rounded-full border-0 bg-accent px-6.5 py-3.5 text-base font-semibold text-accent-ink hover:brightness-110"
+          [disabled]="status() === 'sending'"
+          class="btn cursor-pointer self-start rounded-full border-0 bg-accent px-6.5 py-3.5 text-base font-semibold text-accent-ink hover:brightness-110 disabled:cursor-wait disabled:opacity-70"
         >
-          {{ dict().contact.send }}
+          {{ status() === 'sending' ? dict().contact.sending : dict().contact.send }}
         </button>
+        <p role="alert" class="m-0 text-sm text-fg-2 empty:hidden">
+          @if (status() === 'error') {
+            {{ dict().contact.errorBody }}
+            <a [href]="fallbackUrl()" class="text-accent underline">{{ dict().contact.errorFallback }}</a>
+          }
+        </p>
       </form>
     } @else {
       <div role="status" class="flex flex-col gap-2 self-end rounded-2xl border border-line bg-bg-2 p-8">

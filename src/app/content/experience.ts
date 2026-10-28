@@ -30,7 +30,7 @@ export const experience: readonly Job[] = [
   {
     id: 'matys',
     company: 'Matys by Cegid',
-    period: { en: 'Nov 2024 — now', fr: 'Nov. 2024 — aujourd’hui' },
+    period: { en: 'Sep 2024 — now', fr: 'Sept. 2024 — aujourd’hui' },
     role: {
       en: 'Software engineer (front-end / Angular) · Hubbix accounting SaaS',
       fr: 'Ingénieur logiciel (front-end / Angular) · SaaS de comptabilité Hubbix',

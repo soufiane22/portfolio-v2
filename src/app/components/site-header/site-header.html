@@ -11,7 +11,17 @@
     <div class="flex items-center gap-4 nav:gap-7">
       <nav [attr.aria-label]="dict().a11y.primaryNav" class="hidden gap-6.5 font-mono text-[13px] text-mute nav:flex">
         @for (key of navKeys; track key) {
-          <a [routerLink]="['/', lang()]" [fragment]="key">{{ dict().nav[key] }}</a>
+          <a
+            [routerLink]="['/', lang()]"
+            [fragment]="key"
+            (click)="select(key)"
+            [attr.aria-current]="active() === key ? 'location' : null"
+            class="relative py-1 transition-colors after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:origin-left after:bg-accent after:transition-transform"
+            [class.text-fg]="active() === key"
+            [class.after:scale-x-100]="active() === key"
+            [class.after:scale-x-0]="active() !== key"
+            >{{ dict().nav[key] }}</a
+          >
         }
       </nav>
       <app-lang-switch [lang]="lang()" [label]="dict().header.language" />
@@ -34,10 +44,13 @@
         <a
           [routerLink]="['/', lang()]"
           [fragment]="key"
-          (click)="menuOpen.set(false)"
-          class="py-2.5"
+          (click)="select(key)"
+          [attr.aria-current]="active() === key ? 'location' : null"
+          class="flex items-center gap-3 py-2.5"
+          [class.text-accent]="active() === key"
           [class.border-b]="!last"
           [class.border-line-2]="!last"
+          ><span aria-hidden="true" class="size-1.5 rounded-full" [class]="active() === key ? 'bg-accent' : 'bg-transparent'"></span
           >{{ dict().nav[key] }}</a
         >
       }

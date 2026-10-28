@@ -14,7 +14,6 @@ export interface Dictionary {
     readonly primaryNav: string;
     readonly mobileNav: string;
     readonly home: string;
-    readonly stats: string;
     readonly stack: string;
     readonly downloadCv: string;
   };
@@ -24,12 +23,6 @@ export interface Dictionary {
     readonly viewWork: string;
     readonly downloadCv: string;
     readonly location: string;
-  };
-  readonly stats: {
-    readonly users: string;
-    readonly employees: string;
-    readonly manualWork: string;
-    readonly years: string;
   };
   readonly sections: {
     readonly about: string;
@@ -71,9 +64,12 @@ export interface Dictionary {
     readonly emailField: string;
     readonly message: string;
     readonly send: string;
+    readonly sending: string;
     readonly sentTitle: string;
     readonly sentBody: string;
     readonly subject: string;
+    readonly errorBody: string;
+    readonly errorFallback: string;
   };
   readonly footer: { readonly backToTop: string; readonly location: string };
   readonly caseStudy: {
