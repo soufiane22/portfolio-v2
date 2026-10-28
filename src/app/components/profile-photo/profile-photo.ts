@@ -15,6 +15,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
         [alt]="alt()"
         width="538"
         height="464"
+        loading="lazy"
         class="size-full rounded-2xl border border-line bg-bg-2 object-cover object-[50%_20%]"
       />
     </div>

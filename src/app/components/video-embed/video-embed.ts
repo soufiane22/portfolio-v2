@@ -33,6 +33,7 @@ const YOUTUBE_ID = /^[\w-]{11}$/;
           <img
             [ngSrc]="poster()"
             fill
+            loading="lazy"
             alt=""
             class="scale-105 object-cover opacity-55 blur-[1.5px] transition-[opacity,filter] duration-300 group-hover:opacity-70 group-hover:blur-0"
           />

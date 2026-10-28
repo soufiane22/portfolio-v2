@@ -36,6 +36,8 @@ export class Home {
   private readonly seo = inject(Seo);
 
   constructor() {
-    effect(() => this.seo.update(this.lang(), this.dict().meta.title, this.dict().meta.description));
+    effect(() =>
+      this.seo.update({ lang: this.lang(), title: this.dict().meta.title, description: this.dict().meta.description, path: '' }),
+    );
   }
 }

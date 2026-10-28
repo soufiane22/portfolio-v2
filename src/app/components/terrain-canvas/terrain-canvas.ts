@@ -1,4 +1,4 @@
-import {
+  import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
@@ -40,7 +40,7 @@ const PALETTES: Record<Theme, Palette> = {
   light: { base: '40,30,18', accent: '196,124,26', edgeAlpha: 0.32 },
 };
 const COLS = 26;
-const ROWS = 11;
+const ROWS = 12;
 const STATIC_TIME = 4;
 
 /** Deterministic PRNG so the terrain looks identical on every load. */
@@ -60,7 +60,9 @@ function buildTerrain(): { nodes: Node3[]; edges: [number, number][] } {
     for (let i = 0; i < COLS; i++) {
       nodes.push({
         x: -1.7 + (3.4 * i) / (COLS - 1) + (r() - 0.5) * 0.07,
-        z: j / (ROWS - 1) + (r() - 0.5) * 0.03,
+        // The first row sits slightly in front of the camera (z < 0) so it projects below
+        // the canvas and the mesh reaches the bottom edge of the hero.
+        z: (j - 1) / (ROWS - 2) + (r() - 0.5) * 0.03,
       });
     }
   }

@@ -85,7 +85,13 @@ export class CaseStudyPage {
     effect(() => {
       const study = this.study();
       if (!study) return;
-      this.seo.update(this.lang(), `${study.title[this.lang()]} — ${study.org}`, study.problem[this.lang()]);
+      this.seo.update({
+        lang: this.lang(),
+        title: `${study.title[this.lang()]} — ${study.org}`,
+        description: study.problem[this.lang()],
+        path: `/work/${this.slug()}`,
+        type: 'article',
+      });
     });
   }
 }
