@@ -1,6 +1,8 @@
-<section id="top" class="relative isolate flex min-h-[min(860px,calc(100svh-67px))] flex-col overflow-hidden">
+<section id="top" class="relative isolate flex min-h-[calc(100svh-67px)] flex-col overflow-hidden">
   <div aria-hidden="true" class="absolute inset-x-0 bottom-0 -z-10 h-3/5">
-    <app-terrain-canvas class="block size-full" />
+    <!-- Same 768px breakpoint as the terrain's own "small screen" check. -->
+    <app-terrain-canvas class="hidden size-full md:block" />
+    <app-perspective-grid class="md:hidden" />
     <div class="absolute inset-0 bg-linear-to-b from-bg from-0% to-transparent to-45%"></div>
   </div>
 
@@ -24,7 +26,7 @@
         class="btn rounded-full bg-accent px-6.5 py-3.5 text-base font-semibold text-accent-ink hover:brightness-110"
         >{{ dict().hero.viewWork }}</a
       >
-      <div class="flex items-center rounded-full border border-line pr-1.5 text-base font-medium">
+      <div class="flex items-center rounded-full border border-line bg-hdr pr-1.5 text-base font-medium md:backdrop-blur-sm">
         <!-- The label downloads the CV in the language of the current page; the pills pick either one. -->
         <a [href]="profile.cv[lang()]" download class="btn py-3 pr-3 pl-5.5">{{ dict().hero.downloadCv }}</a>
         @for (l of langs; track l) {
@@ -42,19 +44,33 @@
       </div>
     </div>
 
-    <p class="m-0 flex flex-wrap justify-center gap-x-5.5 gap-y-2 font-mono text-xs text-mute">
-      <a [href]="profile.links.github.href" rel="noopener" target="_blank">GitHub ↗</a>
-      <a [href]="profile.links.linkedin.href" rel="noopener" target="_blank">LinkedIn ↗</a>
-      <span>{{ dict().hero.location }}</span>
+    <!-- Solid pills so the links stay readable over the animated background. -->
+    <p class="m-0 flex flex-wrap items-center justify-center gap-x-3 gap-y-2.5 font-mono text-xs">
+      <a
+        [href]="profile.links.github.href"
+        rel="noopener"
+        target="_blank"
+        class="rounded-full border border-line bg-hdr px-3.5 py-2 text-fg-2 md:backdrop-blur-sm hover:border-accent hover:text-fg"
+        >GitHub ↗</a
+      >
+      <a
+        [href]="profile.links.linkedin.href"
+        rel="noopener"
+        target="_blank"
+        class="rounded-full border border-line bg-hdr px-3.5 py-2 text-fg-2 md:backdrop-blur-sm hover:border-accent hover:text-fg"
+        >LinkedIn ↗</a
+      >
+      <span class="pl-1 text-fg-2">{{ dict().hero.location }}</span>
     </p>
   </div>
-</section>
 
-<ul
-  [attr.aria-label]="dict().a11y.stack"
-  class="page-x m-0 flex list-none flex-wrap justify-center gap-x-8 gap-y-3 border-y border-line-2 py-[18px] font-mono text-[13px] text-mute"
->
-  @for (tech of profile.stack; track tech) {
-    <li>{{ tech }}</li>
-  }
-</ul>
+  <!-- Last row of the first screen, over the terrain. -->
+  <ul
+    [attr.aria-label]="dict().a11y.stack"
+    class="page-x m-0 flex list-none flex-wrap justify-center gap-x-8 gap-y-3 border-y border-line-2 bg-hdr py-[18px] font-mono text-[13px] text-mute md:backdrop-blur-sm"
+  >
+    @for (tech of profile.stack; track tech) {
+      <li>{{ tech }}</li>
+    }
+  </ul>
+</section>

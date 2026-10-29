@@ -4,7 +4,8 @@ import { AboutSection } from '../../components/about-section/about-section';
 import { ContactSection } from '../../components/contact-section/contact-section';
 import { ExperienceSection } from '../../components/experience-section/experience-section';
 import { Hero } from '../../components/hero/hero';
-import { NotesSection } from '../../components/notes-section/notes-section';
+// TODO: notes hidden until they are written (see home.html).
+// import { NotesSection } from '../../components/notes-section/notes-section';
 import { SiteFooter } from '../../components/site-footer/site-footer';
 import { SiteHeader } from '../../components/site-header/site-header';
 import { SkillsSection } from '../../components/skills-section/skills-section';
@@ -22,7 +23,7 @@ import { dictionaries, type Lang } from '../../i18n';
     ExperienceSection,
     WorkSection,
     SkillsSection,
-    NotesSection,
+    // NotesSection,
     ContactSection,
     SiteFooter,
   ],

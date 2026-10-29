@@ -5,7 +5,8 @@ import type { Dictionary, Lang } from '../../i18n';
 import { LangSwitch } from '../lang-switch/lang-switch';
 import { ThemeToggle } from '../theme-toggle/theme-toggle';
 
-const NAV_KEYS = ['about', 'experience', 'work', 'skills', 'notes', 'contact'] as const;
+// TODO: add 'notes' back between 'skills' and 'contact' once the notes section is restored.
+const NAV_KEYS = ['about', 'experience', 'work', 'skills', 'contact'] as const;
 type NavKey = (typeof NAV_KEYS)[number];
 
 /** A section becomes current once its top passes this line, just under the sticky header. */

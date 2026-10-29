@@ -211,14 +211,10 @@ export const caseStudies: readonly CaseStudy[] = [
         en: 'One processing screen per invoice, split into independent sections.',
         fr: 'Un seul écran de traitement par facture, découpé en rubriques indépendantes.',
       },
+      // Internal class and service names stay out: the codebase is confidential.
       before: {
-        en: 'Each section has its own component and keeps its state in a service like ',
-        fr: 'Chaque rubrique a son composant et garde son état dans un service comme ',
-      },
-      code: 'FactureTvaFormulaireService',
-      after: {
-        en: '. A new rule of the reform becomes a new section, not a rewrite: discounts, prepayments, original invoice of a credit note, e-invoice statuses.',
-        fr: '. Une nouvelle règle de la réforme devient une rubrique, pas une réécriture : escompte, paiements anticipés, facture d’origine d’un avoir, statuts de facture électronique.',
+        en: 'Each section has its own component and keeps its state in its own service. A new rule of the reform becomes a new section, not a rewrite: discounts, prepayments, original invoice of a credit note, e-invoice statuses.',
+        fr: 'Chaque rubrique a son composant et garde son état dans son propre service. Une nouvelle règle de la réforme devient une rubrique, pas une réécriture : escompte, paiements anticipés, facture d’origine d’un avoir, statuts de facture électronique.',
       },
     },
     contribution: {
@@ -251,8 +247,8 @@ export const caseStudies: readonly CaseStudy[] = [
       { value: '#2', label: { en: 'contributor among 15+ developers', fr: 'contributeur sur 15+ développeurs' } },
     ],
     outcome: {
-      en: 'The team shipped 47 production releases since September 2024. The e-invoicing screens I worked on went out batch by batch.',
-      fr: 'L’équipe a livré 47 versions en production depuis septembre 2024. Les écrans de facture électronique sur lesquels j’ai travaillé sont partis lot par lot.',
+      en: 'The e-invoicing screens I worked on went to production batch by batch, through regular releases since September 2024.',
+      fr: 'Les écrans de facture électronique sur lesquels j’ai travaillé sont partis en production lot par lot, au fil de livraisons régulières depuis septembre 2024.',
     },
     stack: ['Angular 17', 'TypeScript', 'RxJS', 'Signals', 'Nx', 'NG-ZORRO', 'Jest', 'Factur-X', 'OAuth 2.0 / OIDC', 'Azure DevOps'],
   },
@@ -646,7 +642,7 @@ export const caseStudies: readonly CaseStudy[] = [
       { value: '−90%', label: { en: 'manual Excel work', fr: 'de travail manuel sous Excel' }, accent: true },
       { value: '30+ h', label: { en: 'saved per week by automation', fr: 'économisées par semaine grâce à l’automatisation' } },
       { value: '30+', label: { en: 'business modules', fr: 'modules métier' } },
-      { value: '57', label: { en: 'roles across 13 departments', fr: 'rôles répartis dans 13 départements' } },
+      { value: '20+', label: { en: 'roles across 13 departments', fr: 'rôles répartis dans 13 départements' } },
       { value: '≈364', label: { en: 'API endpoints', fr: 'endpoints d’API' } },
     ],
     outcome: {

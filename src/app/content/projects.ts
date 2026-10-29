@@ -50,8 +50,8 @@ export const projects: readonly Project[] = [
     },
     stack: ['Angular', 'Node.js', 'Express', 'MongoDB', 'Socket.IO', 'QuickBooks API'],
     decision: {
-      en: 'Made the API the security boundary: every route chains role, department, Joi validation and record-level guards — 57 roles across 13 departments.',
-      fr: 'Faire de l’API la frontière de sécurité : chaque route enchaîne contrôles de rôle, de département, validation Joi et accès à l’enregistrement — 57 rôles répartis dans 13 départements.',
+      en: 'Made the API the security boundary: every route chains role, department, Joi validation and record-level guards — 20+ roles across 13 departments.',
+      fr: 'Faire de l’API la frontière de sécurité : chaque route enchaîne contrôles de rôle, de département, validation Joi et accès à l’enregistrement — plus de 20 rôles répartis dans 13 départements.',
     },
     repos: [],
     caseStudy: 'sanford',
@@ -80,6 +80,8 @@ export const projects: readonly Project[] = [
     ],
     caseStudy: 'premo',
   },
+  // TODO: Factoo hidden until the project is finished. Uncomment to show it again.
+  /*
   {
     id: 'factoo',
     org: { en: 'Personal project', fr: 'Projet personnel' },
@@ -101,4 +103,5 @@ export const projects: readonly Project[] = [
     repos: [{ href: 'https://github.com/soufiane22' }],
     inProgress: true,
   },
+  */
 ];

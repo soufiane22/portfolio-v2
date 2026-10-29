@@ -37,7 +37,8 @@ export const en: Dictionary = {
     work: '03 — Case studies',
     skills: '04 — Skills',
     notes: '05 — Notes',
-    contact: '06 — Contact',
+    // TODO: back to '06' when the notes section (05) is restored.
+    contact: '05 — Contact',
   },
   headings: {
     experience: 'Where I’ve shipped',

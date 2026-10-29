@@ -19,7 +19,7 @@ export const profile = {
   },
   // PDFs live in public/cv/ and are served from /cv/.
   cv: {
-    en: '/cv/Soufiane_Aloui_El_Idrissi_Full_Stack_Engeneer_EN.pdf',
+    en: '/cv/Soufiane_Aloui_El_Idrissi_Full_Stack_Engineer_EN.pdf',
     fr: '/cv/Soufiane_Aloui_El_Idrissi_CV_Full_Stack_Engineer_FR.pdf',
   },
   stack: ['Angular', 'TypeScript', 'RxJS', 'Nx', 'Node.js', 'Spring Boot', 'MongoDB', 'Azure DevOps'],

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://portfolio-v2-beryl-iota.vercel.app/en</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://portfolio-v2-beryl-iota.vercel.app/en"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://portfolio-v2-beryl-iota.vercel.app/fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://portfolio-v2-beryl-iota.vercel.app/en"/>
+  </url>
+  <url>
+    <loc>https://portfolio-v2-beryl-iota.vercel.app/fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://portfolio-v2-beryl-iota.vercel.app/en"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://portfolio-v2-beryl-iota.vercel.app/fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://portfolio-v2-beryl-iota.vercel.app/en"/>
+  </url>
+  <url>
+    <loc>https://portfolio-v2-beryl-iota.vercel.app/en/work/matys</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://portfolio-v2-beryl-iota.vercel.app/en/work/matys"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://portfolio-v2-beryl-iota.vercel.app/fr/work/matys"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://portfolio-v2-beryl-iota.vercel.app/en/work/matys"/>
+  </url>
+  <url>
+    <loc>https://portfolio-v2-beryl-iota.vercel.app/fr/work/matys</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://portfolio-v2-beryl-iota.vercel.app/en/work/matys"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://portfolio-v2-beryl-iota.vercel.app/fr/work/matys"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://portfolio-v2-beryl-iota.vercel.app/en/work/matys"/>
+  </url>
+  <url>
+    <loc>https://portfolio-v2-beryl-iota.vercel.app/en/work/sanford</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://portfolio-v2-beryl-iota.vercel.app/en/work/sanford"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://portfolio-v2-beryl-iota.vercel.app/fr/work/sanford"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://portfolio-v2-beryl-iota.vercel.app/en/work/sanford"/>
+  </url>
+  <url>
+    <loc>https://portfolio-v2-beryl-iota.vercel.app/fr/work/sanford</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://portfolio-v2-beryl-iota.vercel.app/en/work/sanford"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://portfolio-v2-beryl-iota.vercel.app/fr/work/sanford"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://portfolio-v2-beryl-iota.vercel.app/en/work/sanford"/>
+  </url>
+  <url>
+    <loc>https://portfolio-v2-beryl-iota.vercel.app/en/work/premo</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://portfolio-v2-beryl-iota.vercel.app/en/work/premo"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://portfolio-v2-beryl-iota.vercel.app/fr/work/premo"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://portfolio-v2-beryl-iota.vercel.app/en/work/premo"/>
+  </url>
+  <url>
+    <loc>https://portfolio-v2-beryl-iota.vercel.app/fr/work/premo</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://portfolio-v2-beryl-iota.vercel.app/en/work/premo"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://portfolio-v2-beryl-iota.vercel.app/fr/work/premo"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://portfolio-v2-beryl-iota.vercel.app/en/work/premo"/>
+  </url>
+</urlset>

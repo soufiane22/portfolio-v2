@@ -1,0 +1,62 @@
+:host {
+  --cell: 26px;
+  --line: color-mix(in srgb, var(--fg) 24%, transparent);
+  --dot: color-mix(in srgb, var(--fg) 85%, transparent);
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* The floor: tilted once, never repainted. */
+.grid {
+  position: absolute;
+  inset: 8% -60% auto;
+  height: 190%;
+  transform: perspective(320px) rotateX(55deg);
+  transform-origin: 50% 0;
+  /* Fades in from the horizon so the grid never sits behind the headline. */
+  mask-image: linear-gradient(to bottom, transparent, #000 30%);
+}
+
+/* The pattern, one cell taller than the floor, slides by exactly one cell and loops.
+   Only `transform` is animated, so the compositor moves it without repainting. */
+.plane {
+  position: absolute;
+  inset: calc(var(--cell) * -1) 0 0;
+  background-image:
+    radial-gradient(circle at 0 0, var(--dot) 1.4px, transparent 2px),
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: var(--cell) var(--cell);
+  will-change: transform;
+  animation: advance 2.4s linear infinite;
+}
+
+.glow {
+  position: absolute;
+  inset: auto -20% -30%;
+  height: 80%;
+  background: radial-gradient(ellipse at 50% 100%, color-mix(in oklab, var(--accent) 38%, transparent), transparent 62%);
+  animation: breathe 6s ease-in-out infinite;
+}
+
+@keyframes advance {
+  to {
+    transform: translateY(var(--cell));
+  }
+}
+
+@keyframes breathe {
+  50% {
+    opacity: 0.55;
+    transform: scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plane,
+  .glow {
+    animation: none;
+  }
+}

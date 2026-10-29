@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://portfolio-v2-beryl-iota.vercel.app/sitemap.xml

@@ -1,3 +1,6 @@
+/// <reference types="node" />
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import { caseStudies } from './case-studies';
 import { experience } from './experience';
 import { notes } from './notes';
@@ -44,8 +47,15 @@ describe('content', () => {
     expect(missing).toEqual([]);
   });
 
+  it('points every CV link at a file that exists in public/', () => {
+    // Tests run from the workspace root; a renamed PDF would otherwise only show up as a 404 in production.
+    const missing = LANGS.map((lang) => profile.cv[lang]).filter((href) => !existsSync(join(process.cwd(), 'public', href)));
+    expect(missing).toEqual([]);
+  });
+
   it('never leaks internal names from private employer codebases', () => {
-    const confidential = /trioma|fargov|talon|tefs/i;
+    // Sanford brand names, Matys class/service names and Matys release counts.
+    const confidential = /trioma|fargov|talon|tefs|\w+Service\b|\b\d+ (production releases|versions en production)/i;
     expect(strings(allContent).filter((s) => confidential.test(s))).toEqual([]);
   });
 
